@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
-class LoginPage extends StatefulWidget {
+import 'Registerpage.dart';
 
+class LoginPage extends StatefulWidget {
 
   @override
   State<LoginPage> createState() => _LoginPageState();
+
 }
 
 class _LoginPageState extends State<LoginPage> {
@@ -36,15 +38,20 @@ class _LoginPageState extends State<LoginPage> {
           ),
           ElevatedButton(onPressed: (){
             Hitlogin(email.text,password.text);
-             // duration: const Duration(seconds: 1);
            }, child: Text('Login Here')),
+          SizedBox(height: 15.0,),
+          ElevatedButton(onPressed: (){
+            Navigator.push(context, MaterialPageRoute(builder: (context){
+              return RegisterPage() ;
+            }));
+           }, child: Text("Registration for new User"))
         ],
       ),
     );
   }
 
-  void Hitlogin(name, pass) async {
-    final response = await http.get(Uri.parse(''));
+  void Hitlogin(email, password) async {
+    final response = await http.get(Uri.parse('http://www.digitechy.in.net/Webservice1.asmx/LoginApi?ee='+email+'&pp='+password));
     if(response.statusCode == 200){
       print(response.body);
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Login Sucessfully")));

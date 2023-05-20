@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:http/http.dart' as http;
 
 class RegisterPage extends StatefulWidget {
@@ -12,30 +11,33 @@ class RegisterPage extends StatefulWidget {
 
 class _RegisterPageState extends State<RegisterPage> {
 
-
   var name=TextEditingController();
   var email=TextEditingController();
   var mobile=TextEditingController();
   var add=TextEditingController();
   var pass=TextEditingController();
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(appBar: AppBar(title: Text('Register From'),),
-    
-    
-    body: Column(
+    return Scaffold(
+        appBar: AppBar(
+          title: Text('Register From'),),
+
+     body: Column(
       children: [
         TextField(
           controller: name,
           decoration: InputDecoration(
-          hintText: 'Name'
-        ),),
+           hintText: 'Name'
+          ),
+        ),
 
         TextField(
           controller: email,
           decoration: InputDecoration(
             hintText: 'email'
-        ),),
+          ),
+        ),
         TextField(
           controller: mobile,
           decoration: InputDecoration(
@@ -53,20 +55,10 @@ class _RegisterPageState extends State<RegisterPage> {
         ),),
 
         ElevatedButton(onPressed: (){
-
           HipApiDemo(name.text,email.text,mobile.text,add.text,pass.text);
-
-        }, child: Text('Register'))
+         }, child: Text('Register'))
       ],
-    )
-
-
-
-
-    
-    
-    
-    
+     )
     );
   }
 
@@ -75,9 +67,10 @@ class _RegisterPageState extends State<RegisterPage> {
     if (response.statusCode == 200) {
       // If the call to the server was successful, parse the JSON
       print(response.body);
-      // print("Status OK");
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Register Successful")));
     } else {
       // If that call was not successful, throw an error.
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: CircularProgressIndicator()));
       throw Exception('Failed to load post');
     }
 
