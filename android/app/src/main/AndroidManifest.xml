@@ -1,5 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.registration_with_api">
+    <uses-permission android:name="andriod.permission.INTERNET"></uses-permission>
    <application
         android:label="registration_with_api"
         android:name="${applicationName}"
